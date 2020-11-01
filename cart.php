@@ -19,13 +19,6 @@
     <main>
         <div class="container">
         <div class='pro'>
-            <div class="row mbot-3">
-                <div class="col-sm-2"><h2 class='text-center cart-title'>Sản phẩm</h2></div>
-                <div class="col-sm-3"><h2 class='text-center cart-title'>Đơn giá</h2></div>
-                <div class="col-sm-2"><h2 class='text-center cart-title'>Số lượng</h2></div>
-                <div class="col-sm-3"><h2 class='text-center cart-title'>Tổng cộng</h2></div>
-                <div class="col-sm-2"></div>
-            </div>
             <?php 
                 $isEmpty = true;
                 if(isset($_SESSION['cart'])) {
@@ -37,6 +30,13 @@
                 }
 
                 if(!$isEmpty) {
+                    echo "<div class='row mbot-3'>
+                    <div class='col-sm-2'><h2 class='text-center cart-title'>Sản phẩm</h2></div>
+                    <div class='col-sm-3'><h2 class='text-center cart-title'>Đơn giá</h2></div>
+                    <div class='col-sm-2'><h2 class='text-center cart-title'>Số lượng</h2></div>
+                    <div class='col-sm-3'><h2 class='text-center cart-title'>Tổng cộng</h2></div>
+                    <div class='col-sm-2'></div>
+                </div>";
                     echo "<form action = 'updatecart.php' method='POST'>";
                         foreach($_SESSION['cart'] as $key=>$value) {
                             $item[] = $key;
@@ -85,6 +85,10 @@
                         echo "<a href='delcart.php?item=all'>Xóa giỏ hàng</a>";
                         echo "</div>";
                     echo "</form>";
+                }
+                else {
+                    echo "<h1 class='text-danger'>Giỏ hàng trống</h1>";
+                    echo "<a class='btn btn-primary' href='products.php'>Tiếp tục mua</a>";
                 }
             ?>
         </div>    
