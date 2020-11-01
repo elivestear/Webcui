@@ -1,0 +1,366 @@
+body {
+    background: #12c2e9;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #f64f59, #c471ed, #12c2e9);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #f64f59, #c471ed, #12c2e9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+main .container {
+    background-color: #fff;
+}
+body::-webkit-scrollbar {
+    width: 0.25em;
+
+}
+button {
+    outline: none !important;
+    transition: all .3s;
+}
+body::-webkit-scrollbar-track {
+    background: #1e1e24;
+}
+body::-webkit-scrollbar-thumb {
+    background: #0097e6;
+}
+nav {
+    margin: 0 !important;
+}
+.navbar {
+    background: #2c3e50;
+}
+.clouds {
+    color: #ecf0f1 !important;
+}
+.sun-fl {
+    color: #f1c40f !important;
+}
+
+/*autocomplete*/
+.autocomplete {
+    /*the container must be positioned relative:*/
+    position: relative;
+    display: inline-block;
+}
+.autocomplete-items {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+}
+.autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+}
+.autocomplete-items div:hover {
+    /*when hovering an item:*/
+    background-color: #e9e9e9;
+}
+.autocomplete-active {
+    /*when navigating through the items using the arrow keys:*/
+    background-color: DodgerBlue !important;
+    color: #ffffff;
+}
+
+.hero {
+    margin-top: -20px;
+    position: relative;
+    height: 300px;
+    background: #f1c40f url("../image/header.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.hero-text {
+    position: relative;
+    top: 25%;
+    left: 10%;
+    width: 25%;
+}
+.hero-text h1 {
+    font-weight: 600;
+    color: #fff;
+}
+.hero-text p {
+    color: #ddd;
+    letter-spacing: 2px;
+}
+.btn-1 {
+    background-color: #0097e6;
+    border: 2px solid #fff;
+    color: #ecf0f1;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.list {
+    border-right: 1px solid grey;
+}
+.list ul {
+    margin: 0;
+    padding: 0;
+}
+.list ul li {
+    padding: 20px;
+    list-style: none;
+    border-bottom: 1px solid grey;
+}
+.list ul li a {
+    font-size: 24px;
+}
+.product-show {
+    margin: 1em;
+    padding: 1em;
+    border: 2px solid #ecf0f1;
+}
+.product-image {
+    height: 200px;
+}
+.product-name a {
+    font-weight: 700;
+    color: #0097e6;
+    font-size: 2em;
+}
+.price {
+    color: #e84118;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+.fit {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.category-bg {
+    padding: 5px;
+    position: relative;
+    text-align: center;
+    color: #34495e;
+    font-weight: 700;
+    letter-spacing: 2px;
+    border-bottom: 2px solid #0097e6;
+}
+
+/*-- Footer --*/
+footer {
+background: #1A1E25;
+color: #868c96;
+}
+
+footer p {
+padding: 40px 0;
+text-align: center;
+}
+/*login*/
+.form {
+    margin: 2em auto;
+    width: 30%;
+}
+.form h1 {
+    font-weight: 600;
+    padding: 5px;
+    border-bottom: 4px solid #0097e6;
+    letter-spacing: 2px;
+    color: #0097e6;
+}
+.btn-submit {
+    padding: .5em 1.5em;
+    background-color: #0097e6;
+    color: #ecf0f1;
+    width: 100%;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+.hide {
+    display: none;
+}
+.show {
+    display: block;
+}
+#editor {
+    width: 100%;
+}
+.productDetail h1 {
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #0097e6;
+}
+.btn-done {
+    background-color: #00b894;
+    padding: .5em 1.5em;
+    margin: 1em 0;
+    color: #e9e9e9;
+    text-transform: uppercase;
+    font-weight: 600;
+    border: 2px solid #00b894;
+    transition: all .3s;
+}
+.btn-done:hover {
+    background-color: #e9e9e9;
+    color: #00b894;
+}
+#editBtn {
+    border: none;
+    background-color: #f1c40f;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+.comment {
+    position: relative;
+    padding: 1em;
+    border-bottom: 1px solid grey;
+}
+.cmt-user {
+    color: #20bf6b;
+    font-size: 18px;
+}
+.cmt-comment {
+    border: 1px solid grey;
+    position: absolute;
+    width: 80%;
+    right: 0;
+}
+.cmt-comment {
+    margin: 1em;
+}
+.comment-form {
+    margin-bottom: 2em;
+}
+.comment-form textarea {
+    padding: 1em;
+    letter-spacing: 2px;
+    font-size: 18px;
+    color: #1e1e24;
+    resize: vertical;
+    width: 100%;
+}
+.img-cont {
+    width: 50%;   
+    height: 50%;
+}
+.viewmoreBtn {
+    width: 99%;
+    text-align: right;
+}
+.viewmoreBtn a {
+    outline: none;
+    padding: .5em 2em;
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 1px;
+    background: #f1c40f;
+    transition: all .25s;
+    border: 2px solid #f1c40f;
+}
+.viewmoreBtn a:hover {
+    text-decoration: none;
+    transform: scale(1.1);
+    background: #fff;
+    color: #f1c40f;
+}
+.productImg {
+    padding: 1em;
+}
+.addBtn {
+    text-decoration: none;
+    color: #f1c40f;
+    border-radius: 5px;
+    border: 1px solid #f1c40f;
+    background: #fff;
+    padding: .5em 1em;
+    transition: all .2s;
+}
+.addBtn:hover {
+    text-decoration: none;
+    background-color: #f1c40f;
+    color: #fff;
+}
+.cartImg {
+    padding: 1em;
+}
+.pro {
+    padding: 2em;
+}
+.total-price h3 {
+    font-weight: 700;
+    color: #d35400;
+}
+.cart-title {
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+.bordered {
+    border-bottom: 1px solid #000;
+}
+.bordered div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 1em;
+}
+.mbot-3 {
+    margin-bottom: 3em;
+}
+.btnCont {
+    padding: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.btnCont input[type="submit"], .btnCont a {
+    margin-left: 1em;
+    padding: .3em 1em;
+    text-transform: uppercase;
+    border: none;
+    outline: none;
+    text-decoration: none;
+}
+.delBtn {
+    font-size: 26px;
+    color: #e84118;
+}
+.delBtn:hover {
+    color: #e84118;
+    animation: roll 0.2s linear forwards;
+}
+.btnCont input[type="submit"] {
+    background-color: #00b894;
+    color: #fff;
+}
+.btnCont input[type="submit"]:hover {
+    background-color: #1aaa8d;
+}
+.btnCont a:last-child {
+    background-color: #e74c3c;
+    color: #fff;
+}
+.btnCont a:last-child:hover {
+    background-color: #c0392b;
+}
+.btnCont a:nth-last-child(2) {
+    color: #fff;
+    background-color: #3498db;
+}
+.btnCont a:nth-last-child(2):hover {
+    background-color: #2980b9;
+}
+.btnCont a:nth-last-child(3) {
+    color: #fff;
+    background-color: #f1c40f;
+}
+.btnCont a:nth-last-child(3):hover {
+    background-color: #f39c12;
+}
+@keyframes roll {
+    0% {
+        transform: rotate(90deg);
+    }
+}
+#checkout-form {
+    max-width: 60%;
+}
