@@ -131,7 +131,13 @@
                         <div class="comment-form">
                                 <h3>Đăng bình luận của bạn</h3>
                                 <textarea name="post" id="post" rows="5"></textarea>
-                                <button class="btn btn-primary" onclick="load();" <?php echo $disable ?>>Đăng</button>
+                                <?php
+                                    if(isset($_SESSION['username'])) {
+                                        ?>
+                                        <button class="btn btn-primary" onclick="load();" <?php echo $disable ?>>Đăng</button>
+                                        <?php
+                                    }
+                                ?>
                                 <script>
                                     function load() {
                                         let cmt = document.getElementById("post").value;

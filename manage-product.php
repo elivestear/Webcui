@@ -20,6 +20,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trang chủ</title>
     <?php include("import.php") ?>
+    <script src="https://cdn.ckeditor.com/4.15.0/standard/ckeditor.js"></script>
 </head>
 <body>
    <header>
@@ -32,7 +33,7 @@
             <div class="col-sm-3">
                 <div class="list-group m-x-2">
                     <a href="manage-product.php" class="list-group-item list-group-item-action list-group-item-primary">Quản lý sản phẩm</a>
-                    <a href="manage-product.php" class="list-group-item list-group-item-action">Quản lý danh mục</a>
+                    <a href="manage-category.php" class="list-group-item list-group-item-action">Quản lý danh mục</a>
                     <a href="manage-product.php" class="list-group-item list-group-item-action">Quản lý tài khoản</a>
                 </div>
             </div>
@@ -63,7 +64,13 @@
                                             <input class="form-control" name="price" type="text" placeholder="đơn giá" required>
                                         </td>
                                         <td>
-                                            <input class="form-control" name="describe" type="text" placeholder="Mô tả">
+                                            <!-- <input class="form-control" name="describe" type="text" placeholder="Mô tả"> -->
+                                            <textarea class="form-control" name="describe" id="describe" placeholder="Mô tả"></textarea>
+                                            <script>
+                                                document.getElementById("describe").addEventListener("click",function(){
+                                                    CKEDITOR.replace( 'describe' );
+                                                });
+                                            </script>
                                         </td>
                                         <td>
                                             <input class="form-control" name="img" type="text" placeholder="Link ảnh" required>
@@ -91,7 +98,20 @@
                             </thead>
                             <tbody>
                             <?php
-                            $query = "SELECT * FROM `sanpham`";
+                             $result = mysqli_query($conn, "SELECT count(id) as total FROM `sanpham`");
+                             $row = mysqli_fetch_assoc($result);
+                             $total_records = $row['total'];
+ 
+                             $current_page = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
+                             $limit = 5;
+ 
+                             $total_page = ceil($total_records / $limit);
+ 
+                             if($current_page > $total_page) $current_page = 1;
+                             elseif($current_page < 1) $current_page = 1;
+ 
+                             $start = ($current_page - 1) * $limit;
+                            $query = "SELECT * FROM `sanpham` LIMIT $start, $limit";
                             $rs = mysqli_query($conn, $query);
                             
                             while($row = mysqli_fetch_assoc($rs)) {
@@ -120,6 +140,26 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="pagination-cont">
+                    <ul class="pagination">
+                    <?php 
+                        if($current_page > 1 && $total_page > 1) {
+                            echo '<li class="page-item"><a href="manage-product.php?page='.($current_page - 1).'"><span class="glyphicon glyphicon-chevron-left"></span></a></li>';
+                        }
+
+                        for($i = 1; $i <= $total_page; $i++) {
+                            if($i == $current_page) {
+                                echo '<li class="page-item active"><a class="page-link" href="#">'.$i.'</a></li>';
+                            } else {
+                                echo '<li class="page-item"><a href="manage-product.php?page='.$i.'">'.$i.'</a></li>';
+                            }
+                        }
+                        if($current_page < $total_page && $total_page > 1) {
+                            echo '<li class="page-item"><a href="manage-product.php?page='.($current_page + 1).'"><span class="glyphicon glyphicon-chevron-right"></span></a></li>';
+                        }
+                    ?>
+                    </ul>
+                </div>
                 </div>
             </div>
         </div>

@@ -40,7 +40,7 @@
    <main>
        <div class="container">
            <div class="form">
-               <h1 class="text-center">Bạn đã trở lại</h1>
+               <h1 class="text-center">Xin chào</h1>
                <form action="" method="POST">
                    <div class="form-group">
                      <!-- <label for="username">Email</label> -->
