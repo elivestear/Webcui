@@ -49,20 +49,31 @@
         </div>
     </form>
     <?php
-      if($_SESSION['permission'] == 1) {
+      if($_SESSION['permission'] == 1 ) {
         ?>
         <ul class="nav navbar-nav">
         <li class="dropdown"><a class="dropdown-toggle clouds" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> Quản lý<span class="caret"></span></a>
         <ul class="dropdown-menu">
             <li><a href="manage-product.php">Hàng hóa</a></li>
-            <li><a href="#">Danh mục</a></li>
-            <li><a href="#">Tài khoản</a></li>
+            <li><a href="manage-category.php">Danh mục</a></li>
+            <li><a href="manage-account.php">Tài khoản</a></li>
         </ul>
-      </li>
-    </ul>
+        </li>
+        </ul>
     <?php
+      }elseif($_SESSION['permission'] == 2) {
+        ?>
+        <ul class="nav navbar-nav">
+        <li class="dropdown"><a class="dropdown-toggle clouds" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> Quản lý<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+            <li><a href="manage-product.php">Hàng hóa</a></li>
+            <li><a href="manage-category.php">Danh mục</a></li>
+        </ul>
+        </li>
+        </ul>
+        <?php
       }
-    ?>
+      ?>
     <ul class="nav navbar-nav navbar-right">
       <?php 
         if(isset($_SESSION['username'])) {

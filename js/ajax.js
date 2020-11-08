@@ -11,5 +11,5 @@ function loadDoc(url, cFunction) {
   }
   function loadCmt(xhttp) {
     document.getElementById("comments").innerHTML =
-    xhttp.responseText + document.getElementById("comments").innerHTML;
+    document.getElementById("comments").innerHTML + xhttp.responseText;
   }

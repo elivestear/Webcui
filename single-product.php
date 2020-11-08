@@ -78,7 +78,7 @@
                             <hr>
                         </div>
                         <?php 
-                            if($_SESSION['permission'] == 1)
+                            if($_SESSION['permission'] == 1 || $_SESSION['permission'] == 2)
                                 echo '<p><button onclick="editToggle()" id="editBtn" class="btn btn-primary mt-1">Sửa mô tả</button></p>
                                 '; 
                         ?>

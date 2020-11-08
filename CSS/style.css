@@ -364,3 +364,7 @@ text-align: center;
 #checkout-form {
     max-width: 60%;
 }
+#describe {
+    resize: none;
+    height: 35px;
+}

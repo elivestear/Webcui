@@ -34,7 +34,7 @@
                 <div class="list-group m-x-2">
                     <a href="manage-product.php" class="list-group-item list-group-item-action list-group-item-primary">Quản lý sản phẩm</a>
                     <a href="manage-category.php" class="list-group-item list-group-item-action">Quản lý danh mục</a>
-                    <a href="manage-product.php" class="list-group-item list-group-item-action">Quản lý tài khoản</a>
+                    <a href="manage-account.php" class="list-group-item list-group-item-action">Quản lý tài khoản</a>
                 </div>
             </div>
             <div class="col-sm-9">
@@ -123,14 +123,14 @@
                                         <td>'.$row['price'].'</td>
                                         <td>'.$row['descript'].'</td>
                                         <td><div class="img-cont"><img class="fit" src="'.$row['img'].'" alt="'.$row['img'].'"></div></td>
-                                        <td>
-                                            <div class="mb-1">
+                                        <td style="display: flex">
+                                            <div>
                                                 <form action ="" method="GET">
                                                     <input class="hide" type="number" name="deleteId" value="'.$row['id'].'">
                                                     <input class="btn btn-danger" type="submit" value="Xóa">   
                                                 </form>
                                             </div>
-                                            <div>
+                                            <div style="margin-left: 5px">
                                                 <a href="productEditor.php?id='.$row['id'].'" class="btn btn-success">Sửa</a>   
                                             </div>
                                         </td>

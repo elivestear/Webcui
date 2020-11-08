@@ -21,9 +21,9 @@
                 $sql = "INSERT INTO `taikhoan`(`username`,`email`,`password`,`permission`) VALUES ('".$_POST['username']."','".$_POST['email']."','". md5($_POST['repassword']) ."',0)";
                 $query = mysqli_query($conn, $sql);
                 echo "<script>window.alert('Đăng ký thành công')</script>";
-                $_SESSION['username'] = $_POST['username'];
-                $_SESSION['permission'] = 0;
-                header("location:index.php");
+                // $_SESSION['username'] = $_POST['username'];
+                // $_SESSION['permission'] = 0;
+                header("location:login.php");
             } else {
                 $err = "Tên đăng nhập đã tồn tại";
             }
