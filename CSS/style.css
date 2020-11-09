@@ -115,6 +115,8 @@ nav {
     margin: 1em;
     padding: 1em;
     border: 2px solid #ecf0f1;
+    min-height: 360px;
+    max-height: 400px;
 }
 .product-image {
     height: 200px;

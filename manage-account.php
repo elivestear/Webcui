@@ -70,18 +70,14 @@
                             $rs = mysqli_query($conn, $query);
                             
                             while($row = mysqli_fetch_assoc($rs)) {
-                                $isadmin = $row['permission'] == 1? "selected" : "";
-                                $iseditor = $row['permission'] == 2? "selected" : "";
-                                $iscustomer = $row['permission'] == 0? "selected" : "";
+                                // $isadmin = $row['permission'] == 1? "selected" : "";
+                                // $iseditor = $row['permission'] == 2? "selected" : "";
+                                // $iscustomer = $row['permission'] == 0? "selected" : "";
                                 echo '<tr>
                                         <td><b style="color:'.permission($row['permission']).'">'.$row['username'].'</b></td>
                                         <td>'.$row['email'].'</td>
                                         <td>
-                                            <select class="form-control" name="permission" id="permission">
-                                                <option value="1" '.$isadmin.'>Quản trị viên</option>
-                                                <option value="2" '.$iseditor.'>Người chỉnh sửa</option>
-                                                <option value="0" '.$iscustomer.'>Người dùng</option>
-                                            </select>
+                                        <b style="color:'.permission($row['permission']).'">'.p($row['permission']).'</b>
                                         </td>
                                         <td style="display: flex;">
                                             <div class="mb-1">
@@ -96,13 +92,23 @@
                                         </td>
                                     </tr>';
                             }
-
+                            function p($p) {
+                                if($p ==1) {
+                                    return "Quản trị viên";
+                                }elseif($p == 2) {
+                                    return "Người chỉnh sửa";
+                                }elseif($p == 0) {
+                                    return "Người dùng";
+                                }
+                            }
                             function permission($p) {
                                 if($p == 1) {
                                     return "#EE5A24";
+                                    // return '<b style="color:#ee5a24">Quản trị viên</b>';
                                 }
                                 elseif($p == 0){
                                     return "#0984e3";
+                                    // return '<b style="color:#ee5a24">Quản trị viên</b>';
                                 }
                                 elseif($p == 2){
                                     return "#009432";

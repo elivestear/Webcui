@@ -121,7 +121,7 @@
                                         <td>'.$row['CategoryID'].'</td>
                                         <td>'.$row['quantity'].'</td>
                                         <td>'.$row['price'].'</td>
-                                        <td>'.$row['descript'].'</td>
+                                        <td style="overflow-x: scroll">'.$row['descript'].'</td>
                                         <td><div class="img-cont"><img class="fit" src="'.$row['img'].'" alt="'.$row['img'].'"></div></td>
                                         <td style="display: flex">
                                             <div>
