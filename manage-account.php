@@ -1,6 +1,10 @@
 <?php 
     session_start();
 
+    if($_SESSION['permission'] != 1) {
+        header('location:login.php');
+    }
+
     $conn = mysqli_connect("localhost","root","mysql","giuaky");
 
     // if($_SERVER['REQUEST_METHOD'] == 'POST') {
