@@ -19,6 +19,10 @@
                     <h1 class="text-center">Danh mục</h1>
                     <ul>
                         <?php
+                            session_start();
+                            if(isset($_REQUEST['pagin-limit'])) {
+                                $_SESSION['pagin-limit'] = $_REQUEST['pagin-limit'];
+                            }
                             $conn = mysqli_connect("localhost","root","mysql","giuaky");
                             $sql = mysqli_query($conn, "SELECT * FROM `danhmuc`");
                             while($row = mysqli_fetch_assoc($sql)) {
@@ -35,11 +39,22 @@
                     <div class="row">
                         <?php
                             $result = mysqli_query($conn, "SELECT count(id) as total FROM `sanpham`");
+
+                            if(isset($_REQUEST['priceS'])) {
+                                if($_REQUEST['priceS'] == 7100) {
+                                    $result = mysqli_query($conn, "SELECT count(id) as total FROM `sanpham` WHERE price > 7000 AND price < 10000");
+                                }
+                                if($_REQUEST['priceS'] == 10000) {
+                                    $result = mysqli_query($conn, "SELECT count(id) as total FROM `sanpham` WHERE price > 10000");
+                                }
+                                $result = mysqli_query($conn, "SELECT count(id) as total FROM `sanpham` WHERE price < {$_REQUEST['priceS']}");
+                            }
+
                             $row = mysqli_fetch_assoc($result);
                             $total_records = $row['total'];
 
                             $current_page = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
-                            $limit = 9;
+                            $limit = ($_SESSION['pagin-limit']) ? $_SESSION['pagin-limit'] : 9;
 
                             $total_page = ceil($total_records / $limit);
 
@@ -47,7 +62,20 @@
                             elseif($current_page < 1) $current_page = 1;
 
                             $start = ($current_page - 1) * $limit;
+
                             $sql = "SELECT * FROM `sanpham` LIMIT $start, $limit";
+
+                            if(isset($_REQUEST['priceS'])) {
+                                $sql = "SELECT * FROM `sanpham` WHERE price < {$_REQUEST['priceS']} LIMIT $start, $limit";
+
+                                if($_REQUEST['priceS'] == 7100) {
+                                    $sql ="SELECT * FROM `sanpham` WHERE price BETWEEN 7000 AND 10000 LIMIT $start, $limit";
+                                }
+                                if($_REQUEST['priceS'] == 10000) {
+                                    $sql = "SELECT * FROM `sanpham` WHERE price > 10000 LIMIT $start, $limit";
+                                }
+                            }
+
                             $query = mysqli_query($conn, $sql);
                             while($row = mysqli_fetch_assoc($query)) {
                                 echo "
@@ -68,6 +96,13 @@
                     </div>
                 </div>
                 <div class="pagination-cont">
+                    <div class="pagin-select">
+                        <form action="index.php">
+                        <label for="pagin-limit">Hiện thị: </label> 
+                        <input type="number" id="pagin-limit" name="pagin-limit" value="<?php echo ($_SESSION['pagin-limit'])? $_SESSION['pagin-limit'] : 9 ?>" min=3 max=9>
+                        <input class="btn btn-success" type="submit" value="Ok">
+                        </form>
+                    </div>
                     <ul class="pagination">
                     <?php 
                         if($current_page > 1 && $total_page > 1) {

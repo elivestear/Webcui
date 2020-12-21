@@ -42,6 +42,28 @@
     <title><?php echo $name ?></title>
     <?php include("import.php") ?>
     <script src="https://cdn.ckeditor.com/4.15.0/standard/ckeditor.js"></script>
+    <style>
+        .reply-section {
+            padding: .2em;
+            font-size: 12px;
+            width: 100%;
+            resize: none;
+            outline: none;
+        }
+        .reply-cont {
+            margin-left: 2em;
+            display: flex;
+            flex-direction: column;
+            font-size: 14px;
+        }
+        .reply-cont p:first-child {
+            font-weight: bold;
+            color: #20bf6b;
+        }
+        .reply-cont p:last-child {
+            margin-left: 1em;
+        }
+    </style>
 </head>
 <body>
    <header>
@@ -104,10 +126,13 @@
                         <div class="comments" id="comments">
                             <?php 
                                 if(isset($productid)) {
-                                    $sql = "SELECT * FROM `comment` WHERE IDproduct =".$productid;
+                                    $sql = "SELECT * FROM `comment` WHERE IDproduct =".$productid." AND parent_id = 0";
                                     $query = mysqli_query($conn, $sql);
                                     $userid = $_SESSION['userid'];
+                                    $i = 0;
                                     while($cmt = mysqli_fetch_assoc($query)) {
+                                    $idname = "reply-form".$i;
+                                    $i++;
                                     $comment = $cmt['cmt'];
                                     $date = $cmt['date'];
                                     $sql2 = "SELECT id, username FROM `taikhoan` WHERE id = ".$cmt['userID'];
@@ -121,9 +146,55 @@
                                             <p class='cmt-user'><span class='glyphicon glyphicon-user'></span>".$user."<span class='text-muted small'> - ".$date."</span></p>
                                             <div class='cmt-commment'>
                                                 ".$comment."
-                                            </div>                                         
+                                            </div>
+                                            <button onclick='replyToggle".$i."();' style='border:none; background-color: transparent; outline:none; color: #0abde3;' class='toggle-reply'>Trả lời</button>
+                                            <script>
+                                                function replyToggle".$i."() {
+                                                    let id = '".$idname."';
+                                                    let editor = document.getElementById(id);
+                                                    if(editor.classList.contains('hide')) {
+                                                        editor.classList.remove('hide');
+                                                    } else {
+                                                        editor.classList.add('hide');
+                                                    }
+                                                }
+                                            </script>     
+                                            <div class='reply-cont' id='rc-".$i."'>
+                                            ";
+                                            $query3 = "SELECT u.id,username,parent_id,cmt,date FROM `comment` c, `taikhoan` u WHERE c.userID = u.id AND c.parent_id =".$cmt['id'];
+                                            $getrl = mysqli_query($conn, $query3);
+
+                                            while($rs = mysqli_fetch_assoc($getrl)){
+                                                echo "<div><p><span class='glyphicon glyphicon-user'></span>".$rs['username']."</p>
+                                                <p>".$rs['cmt']."</p>
+                                                </div>";
+                                            }
+                                            echo "
+                                            </div>                                 
                                         </div>
-                                    ";
+                                        <div id='".$idname."' class='reply-form hide'>
+                                                <textarea id='post-".$idname."' name='reply' class='reply-section' rows='1'></textarea>
+                                        <?php
+                                            if(isset({$_SESSION['username']})) {
+                                                ?>
+                                                <button class='btn btn-primary' onclick='loadreply".$i."();' <?php echo $disable ?>Đăng</button>
+                                                <?php
+                                            }
+                                        ?>
+                                        <script>
+                                            function loadreply".$i."() {
+                                                let cmt = document.getElementById('post-".$idname."').value;
+                                                let url = 'loadComment.php?userid=$userid&productid=$productid&parentid={$cmt['id']}&cmt='+cmt;
+                                                loadDoc(url, loadR".$i." = (xhttp) => {
+                                                    let id = 'rc-".$i."';
+                                                    document.getElementById(id).innerHTML =
+                                                    document.getElementById(id).innerHTML + xhttp.responseText;
+                                                });
+                                                document.getElementById('post-".$idname."').value = '';
+                                            }
+                                        </script>
+                                    </div>
+                                            ";
                                 }
                                 }
                             ?>

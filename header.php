@@ -8,7 +8,7 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand clouds" href="#">VipPro</a>
+      <a class="navbar-brand clouds" href="index.php">VipPro</a>
     </div>
     <ul class="nav navbar-nav">
       <li ><a class="clouds" href="index.php">Trang chủ</a></li>
@@ -48,6 +48,23 @@
             </div>
         </div>
     </form>
+    <form action="index.php" class="navbar-form navbar-left">
+        <div class="input-group">
+            <select class="form-control" name="priceS" id="priceS">
+              <option value="1000">Dưới 1 triệu</option>
+              <option value="3000">Dưới 3 triệu</option>
+              <option value="5000">Dưới 5 triệu</option>
+              <option value="7000">Dưới 7 triệu</option>
+              <option value="7100">7 đến 10 triệu</option>
+              <option value="10000">Trên 10 triệu</option>
+            </select>
+            <div class="input-group-btn">
+            <button class="btn btn-default" type="submit">
+                <i class="glyphicon glyphicon-search"></i>
+            </button>
+            </div>
+        </div>
+    </form>
     <?php
       if($_SESSION['permission'] == 1 ) {
         ?>
@@ -57,6 +74,8 @@
             <li><a href="manage-product.php">Hàng hóa</a></li>
             <li><a href="manage-category.php">Danh mục</a></li>
             <li><a href="manage-account.php">Tài khoản</a></li>
+            <li><a href="manage-receipt.php">Đơn hàng</a></li>
+            <li><a href="sumary.php">Doanh số</a></li>
         </ul>
         </li>
         </ul>

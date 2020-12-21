@@ -39,6 +39,7 @@
                     <a href="manage-product.php" class="list-group-item list-group-item-action list-group-item-primary">Quản lý sản phẩm</a>
                     <a href="manage-category.php" class="list-group-item list-group-item-action">Quản lý danh mục</a>
                     <a href="manage-account.php" class="list-group-item list-group-item-action">Quản lý tài khoản</a>
+                    <a href="manage-receipt.php" class="list-group-item list-group-item-action">Đơn hàng</a>
                 </div>
             </div>
             <div class="col-sm-9">

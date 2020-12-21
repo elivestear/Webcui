@@ -1,6 +1,8 @@
 <?php 
     session_start();
-    session_unset();
+    unset($_SESSION['username']);
+    unset($_SESSION['userid']);
+    unset($_SESSION['permission']);
 
     $conn = mysqli_connect("localhost","root","mysql","giuaky");
     

@@ -1,6 +1,9 @@
 <?php 
     session_start();
     $conn = mysqli_connect("localhost","root","mysql","giuaky");
+    if(!isset($_SESSION['userid'])) {
+        header("location:login.php");
+    }
     // echo '<pre>';
     // var_dump($_SESSION);
     // echo '</pre>';
@@ -12,18 +15,27 @@
         $email = $_POST['email'];
         $phone = $_POST['phone'];
         $time = date("y-m-d");
-        
+        $items = array();
         foreach($_SESSION['cart'] as $key=>$value) {
-            $item[] = $key;
-            $item_q[] = $value;
+            $quantity = mysqli_fetch_row( mysqli_query($conn, "SELECT `quantity` from `sanpham` WHERE `id` =" . $key))[0];
+            $n_quantity = $quantity - $value;
+            mysqli_query($conn, "UPDATE `sanpham` SET `quantity` =".$n_quantity." WHERE `id` =".$key);
+            $items[$key] = $value; 
         }
-        $productid = implode(",",$item);
-        $quantity = implode(",",$item_q);
+        // $productid = implode(",",$item);
+        // $quantity = implode(",",$item_q);
 
-        $sql = "INSERT INTO `hoadon` (`productid`,`quantity`,`date`,`userid`,`address`) VALUES ('".$productid."','".$quantity."','".$time."','".$userid."','".$address."');";        
+        $sql = "INSERT INTO `hoadon` (`date`,`userid`,`address`) VALUES ('".$time."','".$userid."','".$address."');";        
         mysqli_query($conn, $sql);
         $query = mysqli_query($conn, "SELECT `receiptid` FROM `hoadon` ORDER BY receiptid desc");
         $getid = mysqli_fetch_row($query);
+
+        foreach($items as $k=>$v) {
+            $sql = "INSERT INTO `chitiethd`(`idhoadon`,`idsanpham`,`daban`) VALUES ('$getid[0]','$k','$v');";
+            mysqli_query($conn, $sql);
+            $item[] = $k; 
+        }
+        $productid = implode(",",$item);
 
         $directory = "D:\\";
         $filename = $directory . $time . $userid . $getid[0] .".txt";

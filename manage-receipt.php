@@ -11,10 +11,6 @@
     //     $update = "UPDATE `taikhoan` SET `permission` = '".$_POST['permission']."' WHERE `taikhoan`.`id` = ".$_POST['updateId'];
     //     $excute = mysqli_query($conn, $update);
     // }
-    if($_SERVER['REQUEST_METHOD'] == 'GET') {
-        $delete = "DELETE FROM `taikhoan` WHERE `id` = ".$_GET['deleteId'];
-        $confirm = mysqli_query($conn, $delete);
-    }
 ?>
 
 <!DOCTYPE html>
@@ -43,22 +39,24 @@
                 </div>
             </div>
             <div class="col-sm-9">
-                <h1 class="text-center text-primary">Tài khoản</h1>
+
+                <h1 class="text-center text-primary">Hóa đơn</h1>
                             
                 <div class="table-cont">
                     <div class="table-responsive-md">
                         <table class="table table-hover table-bordered">
                             <thead>
                                 <tr>
-                                <th>Tên người dùng</th>
-                                <th>Email</th>
-                                <th>Quyền hạn</th>
-                                <th>Tùy chọn</th>
+                                <th>ID</th>
+                                <th>Người mua</th>
+                                <th>ngày</th>
+                                <th>Địa chỉ</th>
+                                <th>Trạng thái</th>
                                 </tr>
                             </thead>
                             <tbody>
                             <?php
-                             $result = mysqli_query($conn, "SELECT count(id) as total FROM `taikhoan`");
+                             $result = mysqli_query($conn, "SELECT count(receiptid) as total FROM `hoadon`");
                              $row = mysqli_fetch_assoc($result);
                              $total_records = $row['total'];
  
@@ -71,56 +69,43 @@
                              elseif($current_page < 1) $current_page = 1;
  
                              $start = ($current_page - 1) * $limit;
-                            $query = "SELECT * FROM `taikhoan` LIMIT $start, $limit";
+                            $query = "SELECT `receiptid`,`username`,`date`,`address`,`status` FROM `hoadon` receipt, `taikhoan` user WHERE receipt.userID = user.id LIMIT $start, $limit";
                             $rs = mysqli_query($conn, $query);
                             
                             while($row = mysqli_fetch_assoc($rs)) {
-                                // $isadmin = $row['permission'] == 1? "selected" : "";
-                                // $iseditor = $row['permission'] == 2? "selected" : "";
-                                // $iscustomer = $row['permission'] == 0? "selected" : "";
                                 echo '<tr>
-                                        <td><b style="color:'.permission($row['permission']).'">'.$row['username'].'</b></td>
-                                        <td>'.$row['email'].'</td>
-                                        <td>
-                                        <b style="color:'.permission($row['permission']).'">'.p($row['permission']).'</b>
-                                        </td>
-                                        <td style="display: flex;">
-                                            <div class="mb-1">
-                                                <form action ="" method="GET">
-                                                    <input class="hide" type="number" name="deleteId" value="'.$row['id'].'">
-                                                    <input class="btn btn-danger" type="submit" value="Xóa">   
-                                                </form>
-                                            </div>
-                                            <div style="margin-left: 5px">
-                                                <a class="btn btn-success" href="userupdate.php?id='.$row['id'].'">Cập nhật</a>
-                                            </div>
+                                        <td><a class="btn btn-primary" href="receiptdetail.php?id='.$row['receiptid'].'" target="_blank">'.$row['receiptid'].'</a></td>
+                                        <td>'.$row['username'].'</td>
+                                        <td>'.$row['date'].'</td>  
+                                        <td>'.$row['address'].'</td>
+                                        <td style="color:'.sttcolor($row['status']).'; font-weight: 600">
+                                            <p style="cursor: pointer" onclick="confirm(this,'.$row['receiptid'].');">'.$row['status'].'</p>
                                         </td>
                                     </tr>';
                             }
-                            function p($p) {
-                                if($p ==1) {
-                                    return "Quản trị viên";
-                                }elseif($p == 2) {
-                                    return "Người chỉnh sửa";
-                                }elseif($p == 0) {
-                                    return "Người dùng";
-                                }
-                            }
-                            function permission($p) {
-                                if($p == 1) {
-                                    return "#EE5A24";
-                                    // return '<b style="color:#ee5a24">Quản trị viên</b>';
-                                }
-                                elseif($p == 0){
-                                    return "#0984e3";
-                                    // return '<b style="color:#ee5a24">Quản trị viên</b>';
-                                }
-                                elseif($p == 2){
-                                    return "#009432";
-                                }
+
+                            function sttcolor($stt) {
+                                if($stt == 'processing') return '#f1c40f';
+                                if($stt == 'Successful') return '#009432';
+                                if($stt == 'Canceled') return '#EA2027';
                             }
                         ?>
                             </tbody>
+                            <script>
+                                function confirm(status, id) {
+                                    let url = `confirmstatus.php?id=${id}`;
+                                    loadDoc(url, change = (xhttp) => {
+                                        {   
+                                            if(xhttp.responseText == 'ok') {
+                                                status.innerHTML = "Successful";
+                                                status.style.color = "#009432"
+                                            }else {
+                                                window.alert('err');
+                                            }
+                                        }
+                                    });
+                                }
+                            </script>
                         </table>
                     </div>
                     <div class="pagination-cont">
@@ -149,5 +134,6 @@
     </div>
    </main>
    <?php include("footer.php") ?>
+   <script src="js/ajax.js"></script>
 </body>
 </html>
