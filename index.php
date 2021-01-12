@@ -63,10 +63,13 @@
 
                             $start = ($current_page - 1) * $limit;
 
+                            $extra = "";
+
                             $sql = "SELECT * FROM `sanpham` LIMIT $start, $limit";
 
                             if(isset($_REQUEST['priceS'])) {
                                 $sql = "SELECT * FROM `sanpham` WHERE price < {$_REQUEST['priceS']} LIMIT $start, $limit";
+                                $extra = "?PriceS={$_REQUEST['priceS']}";
 
                                 if($_REQUEST['priceS'] == 7100) {
                                     $sql ="SELECT * FROM `sanpham` WHERE price BETWEEN 7000 AND 10000 LIMIT $start, $limit";
@@ -106,18 +109,18 @@
                     <ul class="pagination">
                     <?php 
                         if($current_page > 1 && $total_page > 1) {
-                            echo '<li class="page-item"><a href="index.php?page='.($current_page - 1).'"><span class="glyphicon glyphicon-chevron-left"></span></a></li>';
+                            echo '<li class="page-item"><a href="index.php?page='.($current_page - 1) . $extra.'"><span class="glyphicon glyphicon-chevron-left"></span></a></li>';
                         }
 
                         for($i = 1; $i <= $total_page; $i++) {
                             if($i == $current_page) {
                                 echo '<li class="page-item active"><a class="page-link" href="#">'.$i.'</a></li>';
                             } else {
-                                echo '<li class="page-item"><a href="index.php?page='.$i.'">'.$i.'</a></li>';
+                                echo '<li class="page-item"><a href="index.php?page='.$i . $extra.'">'.$i.'</a></li>';
                             }
                         }
                         if($current_page < $total_page && $total_page > 1) {
-                            echo '<li class="page-item"><a href="index.php?page='.($current_page + 1).'"><span class="glyphicon glyphicon-chevron-right"></span></a></li>';
+                            echo '<li class="page-item"><a href="index.php?page='.($current_page + 1) . $extra.'"><span class="glyphicon glyphicon-chevron-right"></span></a></li>';
                         }
                     ?>
                     </ul>

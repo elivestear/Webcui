@@ -49,6 +49,7 @@
                     <a href="manage-category.php" class="list-group-item list-group-item-action">Quản lý danh mục</a>
                     <a href="manage-account.php" class="list-group-item list-group-item-action">Quản lý tài khoản</a>
                     <a href="manage-receipt.php" class="list-group-item list-group-item-action">Đơn hàng</a>
+                    <a href="sumary.php" class="list-group-item list-group-item-action">Doanh thu năm</a>
                 </div>
             </div>
             <div class="col-sm-9">    
@@ -71,11 +72,11 @@
                 </div>                        
                 <div class="stonks">
                     <?php 
-                        $sql = "SELECT sum(daban) as total_sell FROM `chitiethd`,`hoadon` WHERE idhoadon = receiptid AND MONTH(date) = ". (($_REQUEST['month']) ? $_REQUEST['month'] : date("m"));
+                        $sql = "SELECT sum(daban) as total_sell FROM `chitiethd`,`hoadon` WHERE idhoadon = receiptid AND MONTH(date) = ". (($_REQUEST['month']) ? $_REQUEST['month'] : date("m"))." AND YEAR(date) = " . date("Y");
                         $query = mysqli_query($conn, $sql);
                         $rs = mysqli_fetch_row($query);
                         $totalsell = $rs[0] ? $rs[0]:0;
-                        $sql = "SELECT sanpham.name,daban,hoadon.date,daban*price as total FROM `chitiethd`,`sanpham`,`hoadon` WHERE sanpham.id = idsanpham and receiptid = idhoadon and MONTH(date) = " . (($_REQUEST['month']) ? $_REQUEST['month'] : date("m"));
+                        $sql = "SELECT sanpham.name,daban,hoadon.date,daban*price as total FROM `chitiethd`,`sanpham`,`hoadon` WHERE sanpham.id = idsanpham and receiptid = idhoadon and MONTH(date) = " . (($_REQUEST['month']) ? $_REQUEST['month'] : date("m"))." AND YEAR(date) = ". date("Y");
                         $query = mysqli_query($conn, $sql);
                         $total_stonk = 0;
                     ?>
