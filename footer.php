@@ -1,3 +1,3 @@
     <footer>
-        <p>Copyright &copy; 2019 Chung Quang Nguyen All Rights Reserved.</p>
+        <p>Bán hàng @@ Copyright &copy; 2021 Nguyễn Đức Nhật.</p>
     </footer>

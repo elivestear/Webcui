@@ -1,6 +1,7 @@
 <?php 
-    session_start();
-    $conn = mysqli_connect("localhost","root","mysql","giuaky");
+  error_reporting(null);
+  session_start();
+    $conn = mysqli_connect("localhost","root","","doan");
     $sql = "SELECT * FROM `danhmuc`";
     $query = mysqli_query($conn, $sql);
 ?>
@@ -66,7 +67,7 @@
         </div>
     </form>
     <?php
-      if($_SESSION['permission'] == 1 ) {
+      if(isset($_SESSION['permission']) && $_SESSION['permission'] == 1 ) {
         ?>
         <ul class="nav navbar-nav">
         <li class="dropdown"><a class="dropdown-toggle clouds" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> Quản lý<span class="caret"></span></a>
@@ -80,7 +81,7 @@
         </li>
         </ul>
     <?php
-      }elseif($_SESSION['permission'] == 2) {
+      }elseif(isset($_SESSION['permission']) && $_SESSION['permission'] == 2) {
         ?>
         <ul class="nav navbar-nav">
         <li class="dropdown"><a class="dropdown-toggle clouds" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> Quản lý<span class="caret"></span></a>

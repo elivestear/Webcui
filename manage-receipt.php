@@ -5,7 +5,7 @@
         header('location:login.php');
     }
 
-    $conn = mysqli_connect("localhost","root","mysql","giuaky");
+    $conn = mysqli_connect("localhost","root","","doan");
 
     // if($_SERVER['REQUEST_METHOD'] == 'POST') {
     //     $update = "UPDATE `taikhoan` SET `permission` = '".$_POST['permission']."' WHERE `taikhoan`.`id` = ".$_POST['updateId'];

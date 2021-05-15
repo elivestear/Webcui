@@ -4,7 +4,7 @@
     $userid = $_REQUEST['userid'];
     $productid = $_REQUEST['productid'];
     $date = date("y-m-d");
-    $conn = mysqli_connect("localhost","root","mysql","giuaky");
+    $conn = mysqli_connect("localhost","root","","doan");
     $sql = "INSERT INTO `comment` (`userID`, `IDproduct`, `cmt`, `date`) VALUES ('".$userid."', '".$productid."', '".$cmt."', '".$date."');";
     if(isset($_REQUEST['parentid'])) {
         $sql = "INSERT INTO `comment` (`parent_id`,`userID`, `IDproduct`, `cmt`, `date`) VALUES ('".$_REQUEST['parentid']."','".$userid."', '".$productid."', '".$cmt."', '".$date."');";

@@ -5,14 +5,15 @@
         header('location:login.php');
     }
 
-    $conn = mysqli_connect("localhost","root","mysql","giuaky");
+    $conn = mysqli_connect("localhost","root","","doan");
 
     // if($_SERVER['REQUEST_METHOD'] == 'POST') {
     //     $update = "UPDATE `taikhoan` SET `permission` = '".$_POST['permission']."' WHERE `taikhoan`.`id` = ".$_POST['updateId'];
     //     $excute = mysqli_query($conn, $update);
     // }
     if($_SERVER['REQUEST_METHOD'] == 'GET') {
-        $delete = "DELETE FROM `taikhoan` WHERE `id` = ".$_GET['deleteId'];
+        $dID = isset($_GET['deleteId']) ? $_GET['deleteId'] : null;
+        $delete = "DELETE FROM `taikhoan` WHERE `id` = $dID";
         $confirm = mysqli_query($conn, $delete);
     }
 ?>

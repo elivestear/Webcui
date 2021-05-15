@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    $conn = mysqli_connect("localhost","root","mysql","giuaky");
+    $conn = mysqli_connect("localhost","root","","iuaky");
     if(!isset($_SESSION['userid'])) {
         header("location:login.php");
     }

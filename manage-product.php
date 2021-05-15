@@ -1,18 +1,18 @@
 <?php 
     session_start();
-
     if($_SESSION['permission'] == 0) {
         header('location:login.php');
     }
 
-    $conn = mysqli_connect("localhost","root","mysql","giuaky");
+    $conn = mysqli_connect("localhost","root","","doan");
 
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $add = "INSERT INTO `sanpham` (`name`, `CategoryID`, `price`, `quantity`, `descript`, `img`) VALUES ('".$_POST['prodName']."', '".$_POST['cateId']."', '".$_POST['price']."', '".$_POST['quantity']."', '".$_POST['describe']."', '".$_POST['img']."');";
         $excute = mysqli_query($conn, $add);
     }
     if($_SERVER['REQUEST_METHOD'] == 'GET') {
-        $delete = "DELETE FROM `sanpham` WHERE `id` = ".$_GET['deleteId'];
+        $dID = isset($_GET['deleteId']) ? $_GET['deleteId'] : null;
+        $delete = "DELETE FROM `sanpham` WHERE `id` = $dID";
         $confirm = mysqli_query($conn, $delete);
     }
 ?>

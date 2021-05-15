@@ -11,7 +11,7 @@
         return false;
     }
 
-    $conn = mysqli_connect("localhost","root","mysql","giuaky");
+    $conn = mysqli_connect("localhost","root","","doan");
     $err = "";
     if($_SERVER["REQUEST_METHOD"] == "POST") {
         if($_POST['password'] != $_POST['repassword']) {

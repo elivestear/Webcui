@@ -4,7 +4,7 @@
     unset($_SESSION['userid']);
     unset($_SESSION['permission']);
 
-    $conn = mysqli_connect("localhost","root","mysql","giuaky");
+    $conn = mysqli_connect("localhost","root","","doan");
     
     $err ="";
     if($_SERVER['REQUEST_METHOD'] == "POST") {

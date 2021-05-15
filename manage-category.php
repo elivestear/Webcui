@@ -5,14 +5,15 @@
         header('location:login.php');
     }
 
-    $conn = mysqli_connect("localhost","root","mysql","giuaky");
+    $conn = mysqli_connect("localhost","root","","doan");
 
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $add = "INSERT INTO `danhmuc` (`name`) VALUES ('".$_POST['cateName']."');";
         $excute = mysqli_query($conn, $add);
     }
     if($_SERVER['REQUEST_METHOD'] == 'GET') {
-        $delete = "DELETE FROM `danhmuc` WHERE `id` = ".$_GET['deleteId'];
+        $dID = isset($_GET['deleteId']) ? $_GET['deleteId'] : null;
+        $delete = "DELETE FROM `danhmuc` WHERE `id` = $dID";
         $confirm = mysqli_query($conn, $delete);
     }
 ?>

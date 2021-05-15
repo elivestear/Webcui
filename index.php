@@ -19,11 +19,11 @@
                     <h1 class="text-center">Danh mục</h1>
                     <ul>
                         <?php
-                            session_start();
+                            $_SESSION['pagin-limit'] = 9;
                             if(isset($_REQUEST['pagin-limit'])) {
                                 $_SESSION['pagin-limit'] = $_REQUEST['pagin-limit'];
                             }
-                            $conn = mysqli_connect("localhost","root","mysql","giuaky");
+                            $conn = mysqli_connect("localhost","root","","doan");
                             $sql = mysqli_query($conn, "SELECT * FROM `danhmuc`");
                             while($row = mysqli_fetch_assoc($sql)) {
                                 $productCount = mysqli_query(($conn), "SELECT SUM(if(CategoryID = '".$row['id']."', 1, 0)) AS quantity FROM `sanpham`");

@@ -5,7 +5,7 @@
         header('location:login.php');
     }
 
-    $conn = mysqli_connect('localhost', 'root','mysql','giuaky');
+    $conn = mysqli_connect('localhost', 'root','mysql','doan');
     
 ?>
 

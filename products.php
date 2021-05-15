@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    $conn = mysqli_connect("localhost","root","mysql","giuaky");
+    $conn = mysqli_connect("localhost","root","","doan");
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +25,7 @@
                     $info = mysqli_fetch_assoc($result);
                     $category_records = $info['total'];
                     $current_page = isset($_REQUEST['page']) ? $_REQUEST['page'] : 1;
-                    $limit = ($_SESSION['pagin-limit']) ? $_SESSION['pagin-limit'] : 9;
+                    $limit = isset(($_SESSION['pagin-limit'])) ? $_SESSION['pagin-limit'] : 9;
 
                     $total_page = ceil($category_records / $limit);
 
