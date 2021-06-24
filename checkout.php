@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    $conn = mysqli_connect("localhost","root","","iuaky");
+    $conn = mysqli_connect("localhost","root","","doan");
     if(!isset($_SESSION['userid'])) {
         header("location:login.php");
     }
@@ -107,4 +107,4 @@
 
     <?php include('footer.php') ?>
 </body>
-</html>
+<

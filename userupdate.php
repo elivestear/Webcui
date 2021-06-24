@@ -1,6 +1,6 @@
 <?php
     $ID = $_REQUEST['id'];
-    $conn = mysqli_connect('localhost', 'root','mysql','doan');
+    $conn = mysqli_connect('localhost', 'root', '', 'doan');
 
     if(isset($_POST['submitform'])) {
         $edited = "UPDATE `taikhoan` SET 

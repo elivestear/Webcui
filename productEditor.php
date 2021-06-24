@@ -1,11 +1,11 @@
 <?php
     $ID = $_REQUEST['id'];
-    $conn = mysqli_connect('localhost', 'root','mysql','doan');
+    $conn = mysqli_connect('localhost', 'root','doan');
 
     if(isset($_POST['submitform'])) {
         $edited = "UPDATE `sanpham` SET 
         `name` = '".$_POST['pname']."', 
-        `CategoryID` = '".$_POST['cateId']."', 
+        `CategoryID` = '".$_POST['cateId']."',  
         `quantity` = '".$_POST['quantity']."', 
         `price` = '".$_POST['price']."', 
         `img` = '".$_POST['pimage']."',
